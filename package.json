@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack -p 9002",
-    "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
-    "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
-    "build": "next build && next export",
-    "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
-  },
+  "dev": "next dev --turbopack -p 9002",
+  "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
+  "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint",
+  "typecheck": "tsc --noEmit",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d .next/export"
+},
   "homepage": "https://bhanutejanallamothu.github.io/health_dep/",
   "dependencies": {
     "@genkit-ai/google-genai": "^1.20.0",
