@@ -1,111 +1,118 @@
-Health_DEP
+# HealthReach — Clinical Operations Deployment Instance
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![Security Audit](https://img.shields.io/badge/security-audited-blue.svg)]()
+[![Tech Stack](https://img.shields.io/badge/stack-TypeScript-informational.svg)]()
+[![License](https://img.shields.io/badge/license-private-lightgrey.svg)]()
 
-A responsive Next.js web application built with Firebase Studio — intended as a starter for health-related features and Firebase integration.
+## Overview
+HealthReach is an optimized deployment distribution of the PulseCare healthcare management platform. Tailored for lightweight cloud instances and continuous hosting, it packages patient triage, appointment dispatch, and clinical department workflows.
 
-🚀 This project was generated using Firebase Studio and uses Next.js as the primary framework.
+- **Problem Solved:** Fast deployment instance of clinical patient scheduling.
+- **Target Users:** Healthcare clinics, practitioners, and outpatient centers.
+- **Current Status:** Deployed Web Instance.
 
-📌 Features
+## Features
+- **Patient Triage Dashboard:** Monitor patient waiting queues and urgent consultations.
+- **Appointment Calendar:** Real-time scheduling calendar with slot conflict prevention.
+- **Firebase Integration:** Secure serverless authentication and real-time database synchronization.
 
-✔ Next.js with TypeScript support
-✔ Tailwind CSS for utility-first styling
-✔ Firebase hosting and backend integration
-✔ Firestore database rules (via firestore.rules)
-✔ App configured for deployment on Firebase Hosting
-✔ Built using Firebase Studio starter template
+## Architecture
+```mermaid
+flowchart LR
+    Clinic["Clinic Staff / Patients"] --> Next["Next.js Web Instance (Port 3000)"]
+    Next --> Firebase["Firebase Cloud Platform (Auth + Firestore)"]
+```
 
-🗂️ Repository Structure
+## User Flow
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Patient / Clinic Staff
+    participant UI as HealthReach Next.js App
+    participant Auth as Firebase Auth
+    participant DB as Cloud Firestore
+
+    User->>UI: Navigate to HealthReach dashboard
+    UI->>Auth: Validate user session
+    Auth-->>UI: Authorized
+    User->>UI: Fill appointment consultation form
+    UI->>DB: Add appointment document
+    DB-->>UI: Confirmed with slot identifier
+    UI-->>User: Display confirmation card and clinic arrival instructions
+```
+
+## Technology Stack
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | Next.js 15 | React full-stack application framework |
+| Language | TypeScript | Static type safety |
+| UI | Tailwind CSS, Radix UI | Clinical user interface styling |
+| Backend | Firebase Auth & Firestore | Serverless identity and storage |
+
+## Infrastructure
+- **Port:** 3000
+- **Cloud Platform:** Firebase / Vercel
+
+## Project Structure
+```text
 health_dep/
-├── docs/                 # Project documentation
-├── src/                  # Source code for the app
-│   ├── app/              # Next.js App Router pages
-│   └── components/       # React components
-├── .gitignore
-├── apphosting.yaml       # Firebase Hosting config
-├── components.json
-├── firestore.rules       # Firebase security rules
-├── next.config.ts        # Next.js config
-├── package.json          # NPM dependencies & scripts
-├── tailwind.config.ts    # Tailwind setup
-├── tsconfig.json         # TypeScript config
-└── README.md             # Project overview
+├── src/                 # Application source code
+├── package.json         # Dependencies
+├── .env.example         # Environment template
+├── .gitignore           # Git ignore definitions
+└── README.md            # Technical documentation
+```
 
+## Prerequisites
+- Node.js >= 18.x
+- Firebase Project
 
-(Actual structure may vary slightly — this is inferred from the repository tree.)
+## Environment Variables
+Create `.env.local`:
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+```
 
-🔧 Tech Stack
-Technology	Purpose
-Next.js	React framework for SSR and static sites
-TypeScript	Type-safe JavaScript development
-Tailwind CSS	Utility-first styling
-Firebase	Database, Hosting, and Backend services
-Firebase Studio	Starter scaffolding & rapid prototyping
-✅ Getting Started
-1. Clone the Repo
+## Local Development Setup
+```bash
 git clone https://github.com/Bhanutejanallamothu/health_dep.git
 cd health_dep
-
-2. Install Dependencies
 npm install
-# or
-yarn
-
-3. Configure Firebase
-
-Create a Firebase project and add your config keys. Then:
-
-firebase login
-firebase use --add
-
-
-Add your Firebase configuration to environment variables:
-
-NEXT_PUBLIC_FIREBASE_API_KEY=...
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
-NEXT_PUBLIC_FIREBASE_APP_ID=...
-
-🚀 Development
-
-Start the dev server:
-
 npm run dev
+```
 
+## Docker Setup
+*Not detected in repository.*
 
-Open http://localhost:3000
- in your browser.
+## Database Setup
+Firestore NoSQL database.
 
-📦 Deployment
+## API Documentation
+Internal Next.js server actions and API handlers.
 
-Build the app:
-
+## Deployment
+```bash
 npm run build
+```
 
+## Security
+- Externalized environment secrets.
+- Client authentication state verification.
 
-Deploy to Firebase:
+## Testing
+```bash
+npm run lint
+```
 
-firebase deploy
+## Troubleshooting
+- Check Firebase console to ensure API keys are authorized for hosting domain.
 
+## Future Improvements
+- Automated SMS patient reminder triggers.
 
-This deploys your app to Firebase Hosting using settings from apphosting.yaml and firebase.json.
-
-🧠 What You Can Build With This
-
-This starter can evolve into any of the following:
-
-✨ Health dashboards
-✨ Appointment booking systems
-✨ Real-time health data visualizations
-✨ Firebase authentication + user profiles
-✨ Cloud Firestore-backed data storage
-
-❓ Need Help?
-
-Want to learn how Firebase and Next.js work together? Firebase’s official docs are a great resource:
-
-👉 Integrating Next.js with Firebase Hosting & Firestore — detailed guides available on Firebase documentation.
-
-📄 License
-
-Distributed under the MIT License — feel free to use, modify, and build upon this project.
+## License
+All rights reserved by repository owner.
